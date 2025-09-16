@@ -20,4 +20,9 @@ class Comment extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function edit(Tweet $tweet, Comment $comment)
+    {
+        return view('tweets.comments.edit', compact('tweet', 'comment'));
+    }
 }
