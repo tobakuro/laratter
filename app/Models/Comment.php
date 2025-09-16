@@ -16,8 +16,8 @@ class Comment extends Model
         return $this->belongsTo(Tweet::class);
     }
 
-    public function tweet()
+    public function user()
     {
-        return $this->belongsTo(Tweet::class);
+        return $this->belongsTo(User::class);
     }
 }
