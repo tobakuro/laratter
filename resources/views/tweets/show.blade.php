@@ -26,7 +26,7 @@
             </form>
           </div>
           @endif
-          <div class="flex mt-4">
+          <div class="flex gap-4 mt-4">
             @if ($tweet->liked->contains(auth()->id()))
             <form action="{{ route('tweets.dislike', $tweet) }}" method="POST">
               @csrf
@@ -37,6 +37,19 @@
             <form action="{{ route('tweets.like', $tweet) }}" method="POST">
               @csrf
               <button type="submit" class="text-blue-500 hover:text-blue-700">like {{$tweet->liked->count()}}</button>
+            </form>
+            @endif
+
+            @if (auth()->user()->bookmarks->where('tweet_id', $tweet->id)->isNotEmpty())
+            <form action="{{ route('bookmarks.destroy', $tweet) }}" method="POST">
+              @csrf
+              @method('DELETE')
+              <button type="submit" class="text-yellow-500 hover:text-yellow-700">ブックマーク解除</button>
+            </form>
+            @else
+            <form action="{{ route('bookmarks.store', $tweet) }}" method="POST">
+              @csrf
+              <button type="submit" class="text-gray-500 hover:text-yellow-500">ブックマーク</button>
             </form>
             @endif
           </div>
